@@ -10,7 +10,7 @@ namespace Project6.Models
         public int GroupID { get; set; }
         public string GroupName { get; set; }
 
-        public virtual ICollection<ApplicationUser> Users { get; set; }
-        public virtual ICollection<Content> Contents { get; set; }
+        public virtual ICollection<UserGroup> UserGroups { get; set; }
+        public virtual ICollection<ContentGroup> ContentGroups { get; set; }
     }
 }

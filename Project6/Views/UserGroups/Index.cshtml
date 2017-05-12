@@ -4,7 +4,12 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+@using Microsoft.AspNet.Identity
+<h2>@User.Identity.GetUserName()'s Groups</h2>
+
+<p>
+    @Html.ActionLink("Create Group", "Create", "Groups")
+</p>
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -14,6 +19,9 @@
         <th>
             @Html.DisplayNameFor(model => model.Group.GroupName)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.User.Email)
+        </th>
         <th></th>
     </tr>
 
@@ -21,6 +29,9 @@
     <tr>
         <td>
             @Html.DisplayFor(modelItem => item.Group.GroupName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.User.Email)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |

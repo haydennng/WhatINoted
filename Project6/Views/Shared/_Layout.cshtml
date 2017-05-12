@@ -25,8 +25,9 @@
                 @if (Request.IsAuthenticated)
             {
                     <ul class="nav navbar-nav">
-                        <li>@Html.ActionLink("Contents", "Index", "Contents")</li>
-                        <li>@Html.ActionLink("Groups", "Index", "Groups")</li>
+                        <li>@Html.ActionLink("Contents", "Index", "UserContents")</li>
+                        <li>@Html.ActionLink("Friends", "Index", "Friends")</li>
+                        <li>@Html.ActionLink("Groups", "Index", "UserGroups")</li>
                     </ul>
                 }
                 else

@@ -64,6 +64,6 @@ D:\Work\4900\Project6\Project6\bin\Microsoft.Owin.Security.OAuth.xml
 D:\Work\4900\Project6\Project6\bin\Microsoft.Owin.Security.Google.xml
 D:\Work\4900\Project6\Project6\bin\Microsoft.Owin.Security.Twitter.xml
 D:\Work\4900\Project6\Project6\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
-D:\Work\4900\Project6\Project6\obj\Debug\Project6.csprojResolveAssemblyReference.cache
 D:\Work\4900\Project6\Project6\obj\Debug\Project6.dll
 D:\Work\4900\Project6\Project6\obj\Debug\Project6.pdb
+D:\Work\4900\Project6\Project6\obj\Debug\Project6.csprojResolveAssemblyReference.cache

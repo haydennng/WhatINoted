@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Project6.Models;
+using Microsoft.AspNet.Identity;
 
 namespace Project6.Controllers
 {
@@ -17,12 +18,14 @@ namespace Project6.Controllers
         // GET: UserContents
         public ActionResult Index()
         {
-            var userContents = db.UserContents.Include(u => u.Content);
+            string userid = User.Identity.GetUserId();
+
+            var userContents = db.UserContents.Include(u => u.Content).Include(u => u.User).Where(u => u.Id == userid);
             return View(userContents.ToList());
         }
 
         // GET: UserContents/Details/5
-        public ActionResult Details(int? id)
+        public ActionResult Details(string id)
         {
             if (id == null)
             {
@@ -40,6 +43,7 @@ namespace Project6.Controllers
         public ActionResult Create()
         {
             ViewBag.ContentID = new SelectList(db.Contents, "ContentID", "Note");
+            ViewBag.Id = new SelectList(db.Users, "Id", "Email");
             return View();
         }
 
@@ -48,7 +52,7 @@ namespace Project6.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ApplicationUserID,ContentID")] UserContent userContent)
+        public ActionResult Create([Bind(Include = "Id,ContentID")] UserContent userContent)
         {
             if (ModelState.IsValid)
             {
@@ -58,11 +62,12 @@ namespace Project6.Controllers
             }
 
             ViewBag.ContentID = new SelectList(db.Contents, "ContentID", "Note", userContent.ContentID);
+            ViewBag.Id = new SelectList(db.Users, "Id", "Email", userContent.Id);
             return View(userContent);
         }
 
         // GET: UserContents/Edit/5
-        public ActionResult Edit(int? id)
+        public ActionResult Edit(string id)
         {
             if (id == null)
             {
@@ -74,6 +79,7 @@ namespace Project6.Controllers
                 return HttpNotFound();
             }
             ViewBag.ContentID = new SelectList(db.Contents, "ContentID", "Note", userContent.ContentID);
+            ViewBag.Id = new SelectList(db.Users, "Id", "Email", userContent.Id);
             return View(userContent);
         }
 
@@ -82,7 +88,7 @@ namespace Project6.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ApplicationUserID,ContentID")] UserContent userContent)
+        public ActionResult Edit([Bind(Include = "Id,ContentID")] UserContent userContent)
         {
             if (ModelState.IsValid)
             {
@@ -91,11 +97,12 @@ namespace Project6.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.ContentID = new SelectList(db.Contents, "ContentID", "Note", userContent.ContentID);
+            ViewBag.Id = new SelectList(db.Users, "Id", "Email", userContent.Id);
             return View(userContent);
         }
 
         // GET: UserContents/Delete/5
-        public ActionResult Delete(int? id)
+        public ActionResult Delete(string id)
         {
             if (id == null)
             {
@@ -112,7 +119,7 @@ namespace Project6.Controllers
         // POST: UserContents/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult DeleteConfirmed(string id)
         {
             UserContent userContent = db.UserContents.Find(id);
             db.UserContents.Remove(userContent);
