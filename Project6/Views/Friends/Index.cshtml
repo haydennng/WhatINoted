@@ -1,0 +1,40 @@
+﻿@model IEnumerable<Project6.Models.Friend>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+@using Microsoft.AspNet.Identity
+<h2>@User.Identity.GetUserName()'s Friends</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.User1.Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.User2.Email)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.User1.Email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.User2.Email)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.FriendId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.FriendId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.FriendId })
+        </td>
+    </tr>
+}
+
+</table>

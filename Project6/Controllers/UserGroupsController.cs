@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Project6.Models;
+using Microsoft.AspNet.Identity;
 
 namespace Project6.Controllers
 {
@@ -17,12 +18,14 @@ namespace Project6.Controllers
         // GET: UserGroups
         public ActionResult Index()
         {
-            var userGroups = db.UserGroups.Include(u => u.Group);
+            string userid = User.Identity.GetUserId();
+
+            var userGroups = db.UserGroups.Include(u => u.Group).Include(u => u.User).Where(u => u.Id == userid);
             return View(userGroups.ToList());
         }
 
         // GET: UserGroups/Details/5
-        public ActionResult Details(int? id)
+        public ActionResult Details(string id)
         {
             if (id == null)
             {
@@ -40,6 +43,7 @@ namespace Project6.Controllers
         public ActionResult Create()
         {
             ViewBag.GroupID = new SelectList(db.Groups, "GroupID", "GroupName");
+            ViewBag.Id = new SelectList(db.Users, "Id", "Email");
             return View();
         }
 
@@ -48,7 +52,7 @@ namespace Project6.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ApplicationUserID,GroupID")] UserGroup userGroup)
+        public ActionResult Create([Bind(Include = "Id,GroupID")] UserGroup userGroup)
         {
             if (ModelState.IsValid)
             {
@@ -58,11 +62,12 @@ namespace Project6.Controllers
             }
 
             ViewBag.GroupID = new SelectList(db.Groups, "GroupID", "GroupName", userGroup.GroupID);
+            ViewBag.Id = new SelectList(db.Users, "Id", "Email", userGroup.Id);
             return View(userGroup);
         }
 
         // GET: UserGroups/Edit/5
-        public ActionResult Edit(int? id)
+        public ActionResult Edit(string id)
         {
             if (id == null)
             {
@@ -74,6 +79,7 @@ namespace Project6.Controllers
                 return HttpNotFound();
             }
             ViewBag.GroupID = new SelectList(db.Groups, "GroupID", "GroupName", userGroup.GroupID);
+            ViewBag.Id = new SelectList(db.Users, "Id", "Email", userGroup.Id);
             return View(userGroup);
         }
 
@@ -82,7 +88,7 @@ namespace Project6.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ApplicationUserID,GroupID")] UserGroup userGroup)
+        public ActionResult Edit([Bind(Include = "Id,GroupID")] UserGroup userGroup)
         {
             if (ModelState.IsValid)
             {
@@ -91,11 +97,12 @@ namespace Project6.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.GroupID = new SelectList(db.Groups, "GroupID", "GroupName", userGroup.GroupID);
+            ViewBag.Id = new SelectList(db.Users, "Id", "Email", userGroup.Id);
             return View(userGroup);
         }
 
         // GET: UserGroups/Delete/5
-        public ActionResult Delete(int? id)
+        public ActionResult Delete(string id)
         {
             if (id == null)
             {
@@ -112,7 +119,7 @@ namespace Project6.Controllers
         // POST: UserGroups/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult DeleteConfirmed(string id)
         {
             UserGroup userGroup = db.UserGroups.Find(id);
             db.UserGroups.Remove(userGroup);

@@ -6,110 +6,113 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Project6.Models;
 
-namespace Project6.Models
+namespace Project6.Controllers
 {
-    public class GroupsController : Controller
+    public class ContentsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: Groups
+        // GET: Contents
         public ActionResult Index()
         {
-            return View(db.Groups.ToList());
+            return View(db.Contents.ToList());
         }
 
-        // GET: Groups/Details/5
+        // GET: Contents/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Group group = db.Groups.Find(id);
-            if (group == null)
+            Content content = db.Contents.Find(id);
+            if (content == null)
             {
                 return HttpNotFound();
             }
-            return View(group);
+            return View(content);
         }
 
-        // GET: Groups/Create
+        // GET: Contents/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Groups/Create
+        // POST: Contents/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "GroupID,GroupName")] Group group)
+        public ActionResult Create([Bind(Include = "ContentID,Note,Reference")] Content content)
         {
             if (ModelState.IsValid)
             {
-                db.Groups.Add(group);
+                db.Contents.Add(content);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                //return RedirectToAction("Index");
+                return RedirectToAction("Create", "UserContents");
             }
 
-            return View(group);
+            return View(content);
         }
 
-        // GET: Groups/Edit/5
+        // GET: Contents/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Group group = db.Groups.Find(id);
-            if (group == null)
+            Content content = db.Contents.Find(id);
+            if (content == null)
             {
                 return HttpNotFound();
             }
-            return View(group);
+            return View(content);
         }
 
-        // POST: Groups/Edit/5
+        // POST: Contents/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [ValidateInput(false)]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "GroupID,GroupName")] Group group)
+        public ActionResult Edit([Bind(Include = "ContentID,Note,Reference")] Content content)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(group).State = EntityState.Modified;
+                db.Entry(content).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(group);
+            return View(content);
         }
 
-        // GET: Groups/Delete/5
+        // GET: Contents/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Group group = db.Groups.Find(id);
-            if (group == null)
+            Content content = db.Contents.Find(id);
+            if (content == null)
             {
                 return HttpNotFound();
             }
-            return View(group);
+            return View(content);
         }
 
-        // POST: Groups/Delete/5
+        // POST: Contents/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Group group = db.Groups.Find(id);
-            db.Groups.Remove(group);
+            Content content = db.Contents.Find(id);
+            db.Contents.Remove(content);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

@@ -13,10 +13,12 @@ namespace Project6.Controllers
 
         public ActionResult Index()
         {
-            List<ApplicationUser> users = new List<ApplicationUser>();
-            users = db.Users.ToList();
+            //List<ApplicationUser> users = new List<ApplicationUser>();
+            //users = db.Users.ToList();
 
-            return View(users);
+            //return View(users);
+
+            return View();
         }
 
         public ActionResult About()

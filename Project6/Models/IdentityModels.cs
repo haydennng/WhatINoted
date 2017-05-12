@@ -3,6 +3,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using System.Collections.Generic;
 
 namespace Project6.Models
 {
@@ -16,6 +17,12 @@ namespace Project6.Models
             // Add custom user claims here
             return userIdentity;
         }
+
+        public virtual ICollection<Friend> Friend1 { get; set; }
+        public virtual ICollection<Friend> Friend2 { get; set; }
+
+        public virtual ICollection<UserContent> UserContents { get; set; }
+        public virtual ICollection<UserGroup> UserGroups { get; set; }
     }
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
@@ -30,14 +37,31 @@ namespace Project6.Models
             return new ApplicationDbContext();
         }
 
-        public System.Data.Entity.DbSet<Project6.Models.ContentGroup> ContentGroups { get; set; }
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Friend>()
+                    .HasRequired(m => m.User1)
+                    .WithMany(t => t.Friend1)
+                    .HasForeignKey(m => m.User1Id)
+                    .WillCascadeOnDelete(false);
 
-        public System.Data.Entity.DbSet<Project6.Models.Content> Contents { get; set; }
+            modelBuilder.Entity<Friend>()
+                        .HasRequired(m => m.User2)
+                        .WithMany(t => t.Friend2)
+                        .HasForeignKey(m => m.User2Id)
+                        .WillCascadeOnDelete(false);
 
-        public System.Data.Entity.DbSet<Project6.Models.Group> Groups { get; set; }
+            modelBuilder.Entity<IdentityUserLogin>().HasKey<string>(l => l.UserId);
+            modelBuilder.Entity<IdentityRole>().HasKey<string>(r => r.Id);
+            modelBuilder.Entity<IdentityUserRole>().HasKey(r => new { r.RoleId, r.UserId });
+        }
 
-        public System.Data.Entity.DbSet<Project6.Models.UserGroup> UserGroups { get; set; }
+        public DbSet<Friend> Friends { get; set; }
 
-        public System.Data.Entity.DbSet<Project6.Models.UserContent> UserContents { get; set; }
+        public DbSet<Content> Contents { get; set; }
+        public DbSet<Group> Groups { get; set; }
+        public DbSet<UserContent> UserContents { get; set; }
+        public DbSet<UserGroup> UserGroups { get; set; }
+        public DbSet<ContentGroup> ContentGroups { get; set; }
     }
 }

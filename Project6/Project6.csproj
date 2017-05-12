@@ -169,6 +169,9 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ContentGroupsController.cs" />
+    <Compile Include="Controllers\ContentsController.cs" />
+    <Compile Include="Controllers\FriendsController.cs" />
+    <Compile Include="Controllers\GroupsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\UserContentsController.cs" />
@@ -179,9 +182,8 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Content.cs" />
     <Compile Include="Models\ContentGroup.cs" />
-    <Compile Include="Models\ContentsController.cs" />
+    <Compile Include="Models\Friend.cs" />
     <Compile Include="Models\Group.cs" />
-    <Compile Include="Models\GroupsController.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\UserContent.cs" />
@@ -244,11 +246,6 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\ContentGroups\Create.cshtml" />
-    <Content Include="Views\ContentGroups\Delete.cshtml" />
-    <Content Include="Views\ContentGroups\Details.cshtml" />
-    <Content Include="Views\ContentGroups\Edit.cshtml" />
-    <Content Include="Views\ContentGroups\Index.cshtml" />
     <Content Include="Views\UserGroups\Create.cshtml" />
     <Content Include="Views\UserGroups\Delete.cshtml" />
     <Content Include="Views\UserGroups\Details.cshtml" />
@@ -259,16 +256,26 @@
     <Content Include="Views\UserContents\Details.cshtml" />
     <Content Include="Views\UserContents\Edit.cshtml" />
     <Content Include="Views\UserContents\Index.cshtml" />
-    <Content Include="Views\Groups\Create.cshtml" />
-    <Content Include="Views\Groups\Delete.cshtml" />
-    <Content Include="Views\Groups\Details.cshtml" />
-    <Content Include="Views\Groups\Edit.cshtml" />
-    <Content Include="Views\Groups\Index.cshtml" />
+    <Content Include="Views\ContentGroups\Create.cshtml" />
+    <Content Include="Views\ContentGroups\Delete.cshtml" />
+    <Content Include="Views\ContentGroups\Details.cshtml" />
+    <Content Include="Views\ContentGroups\Edit.cshtml" />
+    <Content Include="Views\ContentGroups\Index.cshtml" />
     <Content Include="Views\Contents\Create.cshtml" />
     <Content Include="Views\Contents\Delete.cshtml" />
     <Content Include="Views\Contents\Details.cshtml" />
     <Content Include="Views\Contents\Edit.cshtml" />
     <Content Include="Views\Contents\Index.cshtml" />
+    <Content Include="Views\Groups\Create.cshtml" />
+    <Content Include="Views\Groups\Delete.cshtml" />
+    <Content Include="Views\Groups\Details.cshtml" />
+    <Content Include="Views\Groups\Edit.cshtml" />
+    <Content Include="Views\Groups\Index.cshtml" />
+    <Content Include="Views\Friends\Create.cshtml" />
+    <Content Include="Views\Friends\Delete.cshtml" />
+    <Content Include="Views\Friends\Details.cshtml" />
+    <Content Include="Views\Friends\Edit.cshtml" />
+    <Content Include="Views\Friends\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

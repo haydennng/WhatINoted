@@ -4,7 +4,12 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+@using Microsoft.AspNet.Identity
+<h2>@User.Identity.GetUserName()'s Contents</h2>
+
+<p>
+    @Html.ActionLink("Create Content", "Create", "Contents")
+</p>
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -13,6 +18,9 @@
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.Content.Note)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.User.Email)
         </th>
         <th></th>
     </tr>
@@ -23,9 +31,12 @@
             @Html.DisplayFor(modelItem => item.Content.Note)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            @Html.DisplayFor(modelItem => item.User.Email)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new {  id=item.User.Id  }) |
+            @Html.ActionLink("Details", "Details", new { id = item.User.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.User.Id })
         </td>
     </tr>
 }

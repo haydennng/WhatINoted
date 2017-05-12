@@ -10,12 +10,12 @@ namespace Project6.Models
     public class UserGroup
     {
         [Key, Column(Order = 0)]
-        public int ApplicationUserID { get; set; }
+        public string Id { get; set; }
 
         [Key, Column(Order = 1)]
         public int GroupID { get; set; }
 
-        public virtual ApplicationUser ApplicationUser { get; set; }
+        public virtual ApplicationUser User { get; set; }
         public virtual Group Group { get; set; }
     }
 }
