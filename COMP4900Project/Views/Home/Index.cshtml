@@ -1,0 +1,12 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+@if (Request.IsAuthenticated)
+{
+    <h2>Home Page</h2>
+}
+else
+{
+    <h2>WhatINoted.com</h2>
+}
