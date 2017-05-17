@@ -30,6 +30,17 @@ namespace COMP4900Project.Controllers
                 return RedirectToAction("Index", "Home");
             }
         }
+        
+        public string GetOne(int? id)
+        {
+            if(id == null)
+            {
+                return null;
+            }
+            Content contentsmodel = db.Contents.Find(id);
+            return contentsmodel.Note;
+
+        }
 
         // GET: Contents/Details/5
         public ActionResult Details(int? id)
@@ -46,6 +57,7 @@ namespace COMP4900Project.Controllers
             return View(content);
         }
 
+      
         // GET: Contents/Create
         public ActionResult Create()
         {
