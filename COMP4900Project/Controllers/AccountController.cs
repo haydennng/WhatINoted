@@ -380,7 +380,7 @@ namespace COMP4900Project.Controllers
         {
             if (User.Identity.IsAuthenticated)
             {
-                return RedirectToAction("Index", "Manage");
+                return RedirectToAction("Index", "Home");
             }
 
             if (ModelState.IsValid)
