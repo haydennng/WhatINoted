@@ -59,6 +59,7 @@ html {
 
 body {
   margin: 0;
+  position:relative;
 }
 
 a:focus {
@@ -3350,7 +3351,7 @@ input[type="button"].btn-block {
   margin-bottom: 1px;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 0px) {
   .navbar-right .dropdown-menu {
     right: 0;
     left: auto;
@@ -4050,7 +4051,7 @@ textarea.input-group-sm > .input-group-btn > .btn {
   clear: both;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 0px) {
   .navbar {
     border-radius: 4px;
   }
@@ -4076,7 +4077,7 @@ textarea.input-group-sm > .input-group-btn > .btn {
   clear: both;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 0px) {
   .navbar-header {
     float: left;
   }
@@ -4248,7 +4249,7 @@ textarea.input-group-sm > .input-group-btn > .btn {
   line-height: 20px;
 }
 
-@media (max-width: 767px) {
+@media (max-width: 0px) {
   .navbar-nav .open .dropdown-menu {
     position: static;
     float: none;
@@ -4271,7 +4272,7 @@ textarea.input-group-sm > .input-group-btn > .btn {
   }
 }
 
-@media (min-width: 768px) {
+@media (min-width: 0px) {
   .navbar-nav {
     float: left;
     margin: 0;

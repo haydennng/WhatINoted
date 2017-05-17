@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using COMP4900Project.Models;
 using Microsoft.AspNet.Identity;
+using System.Drawing;
 
 namespace COMP4900Project.Controllers
 {
@@ -29,6 +30,17 @@ namespace COMP4900Project.Controllers
                 return RedirectToAction("Index", "Home");
             }
         }
+        
+        public string GetOne(int? id)
+        {
+            if(id == null)
+            {
+                return null;
+            }
+            Content contentsmodel = db.Contents.Find(id);
+            return contentsmodel.Note;
+
+        }
 
         // GET: Contents/Details/5
         public ActionResult Details(int? id)
@@ -45,6 +57,7 @@ namespace COMP4900Project.Controllers
             return View(content);
         }
 
+      
         // GET: Contents/Create
         public ActionResult Create()
         {
@@ -163,8 +176,9 @@ namespace COMP4900Project.Controllers
             OCR1 = new OCRTools.OCR();
             OCR1.DefaultFolder = Server.MapPath("/bin");
 
+            OCR1.BitmapImage = (Bitmap)Image.FromStream(ePic.InputStream, true, true);
 
-            OCR1.BitmapImageFile = ePic.FileName;
+            //OCR1.BitmapImageFile = ePic.FileName;
             OCR1.Process();
             content.Note = OCR1.Text;
 

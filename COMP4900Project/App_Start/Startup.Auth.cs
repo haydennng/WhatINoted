@@ -54,15 +54,15 @@ namespace COMP4900Project
             //   consumerKey: "",
             //   consumerSecret: "");
 
-            //app.UseFacebookAuthentication(
-            //   appId: "",
-            //   appSecret: "");
+            app.UseFacebookAuthentication(
+              appId: "1879998688885359",
+              appSecret: "24fab05d1bc7fd2cd92e1addbb3e0409");
 
-            //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
-            //{
-            //    ClientId = "",
-            //    ClientSecret = ""
-            //});
+            app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
+            {
+                ClientId = "373526239015-1hinki4lv0jvlungpe0ps3h1428o6dp5.apps.googleusercontent.com",
+                ClientSecret = "zMao7XLpmWPoxmzNA0rYaIPc"
+            });
         }
     }
 }
